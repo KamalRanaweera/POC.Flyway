@@ -16,7 +16,7 @@ steps:
     script: |
       dir
       
-      \tools\flyway\flyway -url=jdbc:sqlserver://localhost:1434;databaseName=flyway_qc;encrypt=false;integratedSecurity=true;trustServerCertificate=true -outOfOrder=false migrate
-  displayName: 'Run a multi-line script'
+      /tools/flyway/flyway -url=jdbc:sqlserver://localhost:1434;databaseName=flyway_qc;encrypt=false;integratedSecurity=true;trustServerCertificate=true -outOfOrder=false migrate
+  displayName: 'Run Flyway migrations'
   
 
