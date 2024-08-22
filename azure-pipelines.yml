@@ -10,10 +10,13 @@ pool:
   vmImage: ubuntu-latest
 
 steps:
-- script: echo Hello, world!
-  displayName: 'Run a one-line script'
 
-- script: |
-    echo Add other tasks to build, test, and deploy your project.
-    echo See https://aka.ms/yaml
+- task: CmdLine@2
+  inputs:
+    script: |
+      dir
+      
+      \tools\flyway\flyway -url=jdbc:sqlserver://localhost:1434;databaseName=flyway_qc;encrypt=false;integratedSecurity=true;trustServerCertificate=true -outOfOrder=false migrate
   displayName: 'Run a multi-line script'
+  
+
