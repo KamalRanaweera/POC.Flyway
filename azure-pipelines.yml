@@ -26,10 +26,14 @@ pool:
 
 steps:
 
-- task: CmdLine@2
-  inputs:
-    script: |      
-      /tools/flyway/flyway -url=jdbc:sqlserver://localhost:1434;databaseName=$(targetDb);encrypt=false;integratedSecurity=true;trustServerCertificate=true -outOfOrder=false migrate
+- script: |
+    /tools/flyway/flyway -url=jdbc:sqlserver://localhost:1434;databaseName=$(targetDb);encrypt=false;integratedSecurity=true;trustServerCertificate=true -outOfOrder=false migrate
   displayName: 'Run Flyway migrations'
+
+#- task: CmdLine@2
+#  inputs:
+#    script: |      
+#      /tools/flyway/flyway -url=jdbc:sqlserver://localhost:1434;databaseName=$(targetDb);encrypt=false;integratedSecurity=true;trustServerCertificate=true -outOfOrder=false migrate
+#  displayName: 'Run Flyway migrations'
   
 
