@@ -3,8 +3,23 @@
 # Add steps that build, run tests, deploy, and more:
 # https://aka.ms/yaml
 
+parameters:
+- name: target
+  displayName: Target Database
+  type: string
+  default: flyway_test
+  values:
+    - flyway_test
+    - flyway_qc
+    - flyway_stage
+    - flyway_prod
+
+variables:
+- name: targetDb
+  value: ${{ parameters.target }}
+
 trigger:
-- main
+- none
 
 pool:
   name: Flyway
@@ -13,10 +28,8 @@ steps:
 
 - task: CmdLine@2
   inputs:
-    script: |
-      dir
-      
-      /tools/flyway/flyway -url=jdbc:sqlserver://localhost:1434;databaseName=flyway_qc;encrypt=false;integratedSecurity=true;trustServerCertificate=true -outOfOrder=false migrate
+    script: |      
+      /tools/flyway/flyway -url=jdbc:sqlserver://localhost:1434;databaseName=$(targetDb);encrypt=false;integratedSecurity=true;trustServerCertificate=true -outOfOrder=false migrate
   displayName: 'Run Flyway migrations'
   
 
